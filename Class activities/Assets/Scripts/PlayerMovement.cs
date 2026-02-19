@@ -12,6 +12,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform p2;
 
     [SerializeField] private float speed = 5f;
+
+    [SerializeField]
+    private Rigidbody rb;
+    [SerializeField]
+    private Rigidbody rb2;
+    [SerializeField]
+    float jumpHeight = 8f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void OnEnable()
     {
@@ -38,5 +45,17 @@ public class PlayerMovement : MonoBehaviour
 
         if (p1) p1.position += new Vector3(m1.x, 0f, m1.y) * speed * Time.deltaTime;
         if (p2) p2.position += new Vector3(m2.x, 0f, m2.y) * speed * Time.deltaTime;
+
+
+    }
+
+    public void OnJump(InputAction.CallbackContext ctx)
+    {
+        rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+    }
+
+    public void OnJump2(InputAction.CallbackContext ctx)
+    {
+        rb2.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
     }
 }
